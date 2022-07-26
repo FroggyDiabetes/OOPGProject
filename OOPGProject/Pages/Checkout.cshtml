@@ -66,15 +66,24 @@
                             <tr><th>Item</th><th>Price</th><th>Colour</th><th>Quantity</th><th></th></tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @foreach (var i in Model.ProductInfo)
+                            @foreach (var item in Model.FinalProductInfo)
+                            {
+                                for (int j = 0; j < item.Colours.Count; j++)
                                 {
-                                    <td>@i</td>
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.Colours[j]</td>
+                                        <td>@item.Quantity[j]</td>
+                                    </tr>
                                 }
-                            </tr>
+
+                            }
                         </tbody>
                     </table>
                 </p>
+
+                <input type="submit" value="CLEAR" asp-for="SubmitValue"/>
             </div>
         </div>
     </div>
