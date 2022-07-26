@@ -23,7 +23,7 @@ namespace OOPGProject.Pages
 
         public string Message;
 
-        public List<String> ProductInfo = new List<String> { "WorkPadBlack.png", "Work Pad", "9.90" };
+        public List<String> ProductInfo = new List<String> { "Work Pad", "9.90" };
 
         public IActionResult OnPost()
         {
@@ -35,7 +35,7 @@ namespace OOPGProject.Pages
                 ProductInfo.Add(Quantity.ToString());
 
                 TempData["ProductInfo"] = JsonSerializer.Serialize(ProductInfo);
-                Debug.WriteLine(TempData["ProductInfo"]); 
+                //Debug.WriteLine(TempData["ProductInfo"]); 
 
                 return Page();
             }

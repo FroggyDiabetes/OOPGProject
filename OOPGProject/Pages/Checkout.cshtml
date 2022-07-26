@@ -61,36 +61,25 @@
             <div style="width: 100%;">
                 <h3>Order Summary</h3> <br />
                 <p>
-                    <row>
-                        @*<img src="@Model.ProductInfo[2]" style="width: 50px;" />*@
-                        <table class="table">
-                            <thead>
-                                <tr><th>Item</th><th>Price</th><th>Quantity</th><th>Colour</th><th></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                    @foreach (var i in Model.ProductInfo)
-                                    {
-                                        <td>@i</td>
-                                    }
-                                    <td><input type="button" value="Remove" onclick="remove_button"></td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
-                    </row>
+                    <table class="table">
+                        <thead>
+                            <tr><th>Item</th><th>Price</th><th>Colour</th><th>Quantity</th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var i in Model.ProductInfo)
+                                {
+                                    <td>@i</td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
                 </p>
             </div>
         </div>
     </div>
 </form>
 
-<script>
-    function remove_button() {
-        //TempData.Clear("ProductInfo");
-    }
-</script>
 
 <style>
     .flex-container {

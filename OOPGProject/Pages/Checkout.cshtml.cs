@@ -52,7 +52,9 @@ namespace OOPGProject.Pages
 
         public List<string> ProductInfo { get; set; }
 
-        public string[] CountryList = { "Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda",
+		public List<string> CartList { get; set; }
+
+		public string[] CountryList = { "Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda",
 			"Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas (the)","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin",
 			"Bermuda","Bhutan","Bolivia (Plurinational State of)","Bonaire, Sint Eustatius and Saba","Bosnia and Herzegovina","Botswana","Bouvet Island","Brazil",
 			"British Indian Ocean Territory (the)","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Cayman Islands (the)",
@@ -82,13 +84,19 @@ namespace OOPGProject.Pages
 			{
 				ProductInfo = JsonSerializer.Deserialize<List<string>>(TempData.Peek("ProductInfo") as string);
 			}
-			
+			else
+			{
+				ProductInfo = new List<string> { "", "", "", "" };
+			}
+
 		}
 		public IActionResult OnPost()
 		{
 			if (ModelState.IsValid)
 			{
 				TempData.Keep("Product Info");
+
+				CartList = JsonSerializer.Deserialize<List<string>>(TempData.Peek("ProductInfo") as string);
 
 				//TotalCost = ProductInfo[2];
 
@@ -118,5 +126,5 @@ namespace OOPGProject.Pages
 				return Page();
 			}
 		}
-    }
+	}
 }

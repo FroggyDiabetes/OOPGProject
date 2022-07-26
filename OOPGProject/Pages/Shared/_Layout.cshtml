@@ -7,11 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
-    <style>
-        .navbar-light {
-            background-color: white;
-        }
-    </style>
+    
 </head>
 <body style="background-color: #F1F2F2 ">
     <header>
@@ -24,17 +20,17 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav navbar-right">
-                        <li class="nav-item">
+                        <li class="nav-item" style="font-size: larger;">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AllItems">All Items</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; font-size: larger;" asp-area="" asp-page="/Paper">Browse Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Paper">Paper</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; font-size: larger;" asp-area="" asp-page="/About">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Checkout"><img src="Checkout.png" style="width: 25px; height: 25px; margin-left: 15px;" /></a>
+                            <a class="nav-link text-dark" asp-page="/Checkout"><img src="Checkout.png" style="width: 25px; height: 25px; margin-left: 20px;" /></a>
                         </li>
                     </ul>
                 </div>
@@ -60,3 +56,9 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    .navbar-light {
+        background-color: white;
+    }
+</style>
