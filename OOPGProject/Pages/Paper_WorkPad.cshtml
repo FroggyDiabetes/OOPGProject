@@ -1,0 +1,82 @@
+﻿@page
+@model OOPGProject.Pages.WorkPadModel
+@{
+}
+
+<div asp-validation-summary="All"></div>
+<form method="post">
+    <div class="flex-container">
+
+        <div class="flex-child Image">
+            <img src="WorkPadBlack.png" style="width: 700px; height: 700px;" />
+        </div>
+
+        <div class="flex-child Desc">
+            <div>
+                <p><h2 style="padding: 7px;">Work Pad</h2></p>
+                <p><h3 style="padding: 7px;">$9.90</h3></p>
+                <p style="padding: 7px; line-height: 2;">
+                    A sturdy and compact pocket companion that is durable
+                    and easy to carry even if you are always out and about.
+                    This notepad is protected by a hard flip cover, letting
+                    you write whatever you want anytime and anywhere, so that
+                    you don’t ever miss even a single detail.
+                </p>
+                <p style="padding: 7px; line-height: 2.5;">
+                    Dimensions: 120 x 90 x 21 mm <br />
+                    Material: 120 gsm FSC® Certified Paper
+                </p>
+                <b style="padding-left: 7px;">
+                    RISO Ink: Grey (403U)
+                </b> <br /><br />
+                <p style="padding: 7px; line-height: 2.5;">
+                    3mm GRAPHS | 100 SHEETS <br />
+                    Handmade In London
+                </p>
+                <hr />
+                <p style="padding-top: 20px;">
+                    <b style="padding-left: 7px;"> Colour</b>
+
+                    <select asp-for="Colour">
+                        @foreach (var c in Model.ColourList)
+                        {
+                            <option value="@c"> @c </option>
+                        }
+                    </select>
+                </p>
+                <p style="padding-top: 7px;">
+                    <b style="padding-left: 7px;"> Quantity</b>
+                    <input type="number" step="1" asp-for="Quantity">
+                </p>
+                <br />
+                <p>
+                    <input type="submit" value="Add to Cart" 
+                           style="height: 40px; background-color: black; color: white; border-radius: 3px; "/>
+                </p>
+                <p><i style="color: red">@Model.Message</i></p>      
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .flex-container {
+        display: flex;
+        height: 100%;
+    }
+
+    .Image {
+        display: flex;
+        flex: 1;
+        margin-right: -3%;
+        margin-left: -9%;
+    }
+
+    .Desc {
+        display: flex;
+        flex: 1;
+        justify-content: left;
+        margin-top: 2%;
+    }
+</style>
+
