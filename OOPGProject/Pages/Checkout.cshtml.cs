@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json; 
+using System.Text.Json;
+using OOPGProject.Models; 
 
 namespace OOPGProject.Pages
 {
@@ -46,12 +47,14 @@ namespace OOPGProject.Pages
 		[BindProperty]
 		public string Items { get; set; }
 
-		public string Message { get; set; }
+		[BindProperty]
+        public string SubmitValue { get; set; }
+
+        public string Message { get; set; }
 
 		public float TotalCost { get; set; }
 
-        public List<string> ProductInfo { get; set; }
-
+		public List<Item> FinalProductInfo { get; set; } = new List<Item>(); 
 		public List<string> CartList { get; set; }
 
 		public string[] CountryList = { "Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda",
@@ -80,18 +83,26 @@ namespace OOPGProject.Pages
 
 		public void OnGet()
         {
-			if (TempData.Peek("ProductInfo") != null)
+			if (TempData.Peek("FinalProductInfo") != null && TempData.Peek("ProductInfo") != null)
 			{
-				ProductInfo = JsonSerializer.Deserialize<List<string>>(TempData.Peek("ProductInfo") as string);
+				FinalProductInfo = JsonSerializer.Deserialize<List<Item>>(TempData.Peek("FinalProductInfo") as string); 
 			}
 			else
 			{
-				ProductInfo = new List<string> { "", "", "", "" };
+				FinalProductInfo = new List<Item>();
+				TempData["FinalProductInfo"] = JsonSerializer.Serialize(FinalProductInfo); 
 			}
-
+			
 		}
+
 		public IActionResult OnPost()
 		{
+			if (SubmitValue == "CLEAR")
+            {
+				TempData.Remove("FinalProductInfo");
+				return Page();
+			}
+
 			if (ModelState.IsValid)
 			{
 				TempData.Keep("Product Info");

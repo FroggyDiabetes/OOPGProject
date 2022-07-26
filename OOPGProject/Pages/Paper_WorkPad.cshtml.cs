@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Diagnostics;
+using OOPGProject.Models; 
 
 namespace OOPGProject.Pages
 {
@@ -23,20 +24,41 @@ namespace OOPGProject.Pages
 
         public string Message;
 
-        public List<String> ProductInfo = new List<String> { "Work Pad", "9.90" };
+        public Item ProductInfo { get; set; } = new Item(); 
 
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
                 Message = "Added to Cart!";
+                ProductInfo = new Item();
+                ProductInfo.Name = "Work Pad";
+                ProductInfo.Price = 9.90f;
+                ProductInfo.Colours.Add(Colour);
+                ProductInfo.Quantity.Add(Quantity);
 
-                ProductInfo.Add(Colour);
-                ProductInfo.Add(Quantity.ToString());
+                //TempData["ProductInfo"] = JsonSerializer.Serialize(new List<string> { JsonSerializer.Serialize(ProductInfo) });
 
-                TempData["ProductInfo"] = JsonSerializer.Serialize(ProductInfo);
+                if (TempData.Peek("ProductInfo") == null)
+                {
+                    TempData["ProductInfo"] = ProductInfo; 
+                    //TempData["ProductInfo"] = new Item { Name = "", Price = 0, Quantity = new List<int>(), Colours = new List<string>() };
+                }
+                else
+                {
+                    if (TempData.Peek("FinalProductInfo") == null)
+                    {
+                        TempData["FinalProductInfo"] = JsonSerializer.Serialize(new List<Item> { ProductInfo });  
+                    }
+                    else
+                    {
+                        var temp = JsonSerializer.Deserialize<List<Item>>(TempData.Peek("FinalProductInfo") as string);
+                        temp.Add(ProductInfo);
+                        TempData["FinalProductInfo"] = JsonSerializer.Serialize(temp);
+                    }
+
+                }
                 //Debug.WriteLine(TempData["ProductInfo"]); 
-
                 return Page();
             }
             else
