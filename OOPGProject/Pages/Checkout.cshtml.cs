@@ -52,6 +52,14 @@ namespace OOPGProject.Pages
 
         public string Message { get; set; }
 
+		public string DeliveryDate { get; set; }
+
+		public float ProductCost { get; set; }
+
+		public float ShippingCost { get; set; }
+
+		public float TotalProductCost { get; set; }
+
 		public float TotalCost { get; set; }
 
 		public List<Item> FinalProductInfo { get; set; } = new List<Item>(); 
@@ -85,6 +93,7 @@ namespace OOPGProject.Pages
         {
 			if (TempData.Peek("FinalProductInfo") != null && TempData.Peek("ProductInfo") != null)
 			{
+
 				FinalProductInfo = JsonSerializer.Deserialize<List<Item>>(TempData.Peek("FinalProductInfo") as string); 
 			}
 			else
@@ -92,7 +101,15 @@ namespace OOPGProject.Pages
 				FinalProductInfo = new List<Item>();
 				TempData["FinalProductInfo"] = JsonSerializer.Serialize(FinalProductInfo); 
 			}
-			
+
+			foreach (var i in FinalProductInfo)
+            {
+				foreach (var q in i.Quantity)
+                {
+					TotalProductCost += (i.Price * q);
+				}
+            }
+			TempData["TotalProductCost"] = TotalProductCost.ToString();
 		}
 
 		public IActionResult OnPost()
@@ -107,10 +124,6 @@ namespace OOPGProject.Pages
 			{
 				TempData.Keep("Product Info");
 
-				CartList = JsonSerializer.Deserialize<List<string>>(TempData.Peek("FinalProductInfo") as string);
-
-				//TotalCost = ProductInfo[2];
-
 				if (Shipping == "Local Standard" || Shipping == "Local Tracked")
 				{
 					if (Delivery < System.DateTime.Now.AddDays(3))
@@ -118,6 +131,14 @@ namespace OOPGProject.Pages
 						Message = "Preferred delivery date must be at least 3 days from the current date";
 
 						return Page();
+					}
+					if (Shipping == "Local Standard")
+                    {
+						ShippingCost = 1.00f;
+					}
+					else
+                    {
+						ShippingCost = 2.50f;
 					}
 				}
                 else
@@ -128,7 +149,18 @@ namespace OOPGProject.Pages
 
 						return Page();
 					}
+					if (Shipping == "International Standard")
+					{
+						ShippingCost = 20.50f;
+					}
+					else
+					{
+						ShippingCost = 24.50f;
+					}
 				}
+
+				DeliveryDate = string.Format("{0:dd/MM/yyyy hh:mm tt}", Delivery);
+				TotalCost = float.Parse(TempData.Peek("TotalProductCost") as string) + ShippingCost;
 
 				return Page();
 			}

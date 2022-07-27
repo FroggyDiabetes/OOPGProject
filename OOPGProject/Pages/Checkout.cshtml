@@ -77,13 +77,28 @@
                                         <td>@item.Quantity[j]</td>
                                     </tr>
                                 }
-
                             }
                         </tbody>
                     </table>
-                </p>
-
-                <input type="submit" value="CLEAR" asp-for="SubmitValue"/>
+                    <h5 style="text-align:right;"> Total: @Model.TotalProductCost.ToString("c")</h5>
+                    <input type="submit" value="CLEAR" asp-for="SubmitValue" />
+                    <hr />
+                <br />
+                <p>Email: @Model.Email</p>
+                <p>Name: @Model.FirstName @Model.LastName</p>
+                <br />
+                <p>Address: @Model.Address</p>
+                <p>Postal Code: @Model.PostalCode</p>
+                <p>Country: @Model.Country</p>
+                <p>Shipping Option: @Model.Shipping</p>
+                <br />
+                <p>Preferred delivery date: @Model.DeliveryDate</p>
+                <br />
+                <p>Payment Method: @Model.Payment</p>
+                <p>Shipping Cost: @Model.ShippingCost.ToString("c2")</p>
+                <br />
+                <p><h4>Total Cost: @Model.TotalCost.ToString("c2")</h4></p>
+                <br />
             </div>
         </div>
     </div>

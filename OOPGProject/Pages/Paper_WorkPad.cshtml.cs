@@ -37,12 +37,9 @@ namespace OOPGProject.Pages
                 ProductInfo.Colours.Add(Colour);
                 ProductInfo.Quantity.Add(Quantity);
 
-                //TempData["ProductInfo"] = JsonSerializer.Serialize(new List<string> { JsonSerializer.Serialize(ProductInfo) });
-
                 if (TempData.Peek("ProductInfo") == null)
                 {
                     TempData["ProductInfo"] = JsonSerializer.Serialize(ProductInfo); 
-                    //TempData["ProductInfo"] = new Item { Name = "", Price = 0, Quantity = new List<int>(), Colours = new List<string>() };
                 }
                 else
                 {
@@ -58,7 +55,6 @@ namespace OOPGProject.Pages
                     }
 
                 }
-                //Debug.WriteLine(TempData["ProductInfo"]); 
                 return Page();
             }
             else
