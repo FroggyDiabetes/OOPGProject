@@ -107,7 +107,7 @@ namespace OOPGProject.Pages
 			{
 				TempData.Keep("Product Info");
 
-				CartList = JsonSerializer.Deserialize<List<string>>(TempData.Peek("ProductInfo") as string);
+				CartList = JsonSerializer.Deserialize<List<string>>(TempData.Peek("FinalProductInfo") as string);
 
 				//TotalCost = ProductInfo[2];
 
