@@ -41,7 +41,7 @@ namespace OOPGProject.Pages
 
                 if (TempData.Peek("ProductInfo") == null)
                 {
-                    TempData["ProductInfo"] = ProductInfo; 
+                    TempData["ProductInfo"] = JsonSerializer.Serialize(ProductInfo); 
                     //TempData["ProductInfo"] = new Item { Name = "", Price = 0, Quantity = new List<int>(), Colours = new List<string>() };
                 }
                 else
